@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Height Converter</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #101820FF;
+        }
+        #input-box{
+            height: 40px;
+            width: 40%;
+            font-size: 16px;
+        }
+        #convert-btn{
+            background-color: #101820FF;
+            color: #F2AA4CFF;
+            height: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        #error-container{
+            color: red; 
+        }
+        h1{
+            color: #101820FF;
+        }
+        .app-container{
+            background-color: #F2AA4CFF;
+            width: 40%;
+            padding: 50px;
+            text-align: center;
+            border-radius: 20px;
+            position: fixed;
+            left: 25%;
+            top: 15%;
+            
+        }
+        .result-container{
+            display: flex;
+            justify-content: center;
+            background-color: #101820FF;
+            color: #F2AA4CFF;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        #cm-val, #inch-val{
+            width: 50%;
+            padding: 10px;
+            color: green;
+            font-weight: 800;
+            font-size: 16px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <h1>HEIGHT CONVERTER</h1>
+        <p>Enter your height in feet:</p>
+        <div class="input-container">
+            <input type="number" id="input-box" placeholder="Enter value in feet"/>
+            <button id="convert-btn">Convert</button>
+            <div id="error-container"></div>
+        </div>
+        <div class="result-container">
+            <div class="cm-box">
+                <p>Height in centimeters:</p>
+                <input type="number" id="cm-val"/>
+            </div>
+            <div class="inch-box">
+                <p>Height in inches:</p>
+                <input type="number" id="inch-val"/>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById("input-box");
+        const convert = document.getElementById("convert-btn");
+        const error = document.getElementById("error-container");
+        const cmVal = document.getElementById("cm-val");
+        const inchVal = document.getElementById("inch-val");
+
+        let height = 0;
+        input.addEventListener("change", function(e){
+            height = Number(e.target.value);
+        })
+
+        
+        convert.addEventListener("click", function(){
+            if(height > 9){
+                return error.innerText = "No such person exists in recorded history";
+            }else{
+                error.innerText = null;
+            }
+            if(height < 0){
+                return error.innerText = "Please enter a valid number"
+            }else{
+                error.innerText = null;
+            }
+            if(height <= 9 && height >= 0){
+                let centimeters = 30.48 * height;
+                let inches = 12 * height;
+                cmVal.value = centimeters;
+                inchVal.value = inches;
+            }
+            
+        })
+    </script>
+</body>
+</html>
